@@ -1,0 +1,25 @@
+Create TABLE `Gestor`.`t_usuarios`(
+ `id_usuario` INT NOT NULL AUTO_INCREMENT,
+ `nombre` VARCHAR(255)NULL,
+ `fechaNacimiento` DATE NULL,
+ `email` VARCHAR(255) NULL,
+ `usuario` VARCHAR(255) NULL,
+ `password` TEXT NULL,
+ `insert` DATETIME NOT NULL DEFAULT now(),
+ PRIMARY KEY(`id_usuario`));
+
+
+Create TABLE `Gestor`.`t_categorias`(
+ `id_categoria` INT NOT NULL AUTO_INCREMENT,
+  `id_usuario`INT NOT NULL,
+ `nombre` VARCHAR(255)NULL,
+ `fechainsert` DATETIME NOT NULL DEFAULT now(),
+ PRIMARY KEY(`id_categoria`));
+
+ALTER TABLE `Gestor`.`t_categorias` ADD INDEX `fkCategoriaUsuario_idx` (`id_usuario` ASC);
+
+ALTER TABLE `Gestor`.`t_categorias` ADD CONSTRAINT `fkCategoriaUsuario`
+FOREIGN KEY (`id_usuario`)
+REFERENCES `Gestor`.`t_usuarios` (`id_usuario`)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION;
